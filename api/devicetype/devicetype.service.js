@@ -1,4 +1,5 @@
-const pool = require("../../config/dbconfig");
+//config/dbconfigfile requred for db connection
+const pool = require("../../config/dbconfig"); 
 module.exports = {
   createDevType: (data, callback) => {
     pool.query(
