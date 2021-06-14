@@ -1,9 +1,5 @@
 {
-<<<<<<< HEAD
   "name": "homeauto",
-=======
-  "name": "homeautomation",
->>>>>>> 19a78c063db61812721a1beddd5e749b7aab43fb
   "version": "1.0.0",
   "description": "",
   "main": "app.js",
@@ -16,13 +12,8 @@
   "license": "ISC",
   "dependencies": {
     "cors": "^2.8.5",
-<<<<<<< HEAD
-    "dotenv": "^10.0.0",
-    "env": "0.0.2",
-=======
     "dateformat": "^4.5.1",
     "dotenv": "^10.0.0",
->>>>>>> 19a78c063db61812721a1beddd5e749b7aab43fb
     "express": "^4.17.1",
     "mysql": "^2.18.1",
     "nodemon": "^2.0.7"
