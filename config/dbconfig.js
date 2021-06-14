@@ -1,6 +1,10 @@
 const { createPool } = require("mysql");
 
+<<<<<<< HEAD
 //these all parms will give in env file -> npm i dotenv -> npm i mysql
+=======
+
+>>>>>>> 19a78c063db61812721a1beddd5e749b7aab43fb
 const pool = createPool({
 	port:process.env.DB_PORT,
 	host:process.env.DB_HOST,
