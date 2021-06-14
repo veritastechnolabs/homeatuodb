@@ -27,14 +27,14 @@ module.exports = {
         const body=req.body;
         createdevice(body,(error,results)=>{
             if(error){
-                return res.json({
+                return res.status(500).json({
                     "success":0,
-                    "message":"error"
+                    "message":"Database connection error"
                 })
             }
-            return res.json({
+            return res.status(200).json({
                 "success":1,
-                "message":"Record inserted successfully"
+                "data":{'Device':results.insertId}
             })
         })
     },
@@ -47,9 +47,16 @@ module.exports = {
                     "message":"Error"
                 })
             }
-            return res.json({
+            if(results.affectedRows != 0){
+                return res.status(200).json({
+                    success:1,
+                    message:results.affectedRows+" "+'Device Updated Successfully!'
+                })
+            }
+
+            return res.status(404).json({
                 "success":1,
-                "message":"Record updated successfully"
+                "message":"Record Doesn't Exist!!"
             })
         })
     },
@@ -63,9 +70,15 @@ module.exports = {
                     "message":"error"
                 })
             }
-            return res.json({
-                "success":1,
-                "message":"Record deleted successfully"
+            if(results.affectedRows != 0){
+                return res.status(200).json({
+                    success:1,
+                    message:result.affectedRows+" "+'Device Deleted Successfully!'
+                })
+            }
+            return res.status(404).json({
+                "success":0,
+                "message":"Record Doesn't Exist!!"
             })
         })
     },
@@ -78,11 +91,18 @@ module.exports = {
                     "message":"error"
                 })
             }
+            if(results.length == 0){
+                return res.status(404).json({
+                    "success":0,
+                    "message":"Record Doesn't Exist!!"
+                })
+            }
             return res.json({
                 "success":1,
                 "data":{results}
             })
         })
     },
+ 
  
 }
