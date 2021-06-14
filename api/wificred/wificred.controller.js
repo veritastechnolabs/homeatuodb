@@ -22,6 +22,7 @@ module.exports = {
       });
     });
   },
+  
   getWifiCred: (req, res) => {
     getWifiCred((err, result) => {
       if (err) {
@@ -36,6 +37,7 @@ module.exports = {
       });
     });
   },
+
   getWifiCredById: (req, res) => {
    const wificredid = req.params.wificredid;
     getWifiCredById(wificredid,(err, result) => {
@@ -51,6 +53,7 @@ module.exports = {
       });
     });
   },
+
   wificredUpdate: (req, res) => {
     const body = req.body
     wificredUpdate(body,(err, result) => {
@@ -66,6 +69,7 @@ module.exports = {
       });
     });
   },
+
   wificredDelete: (req, res) => {
     const wificredid = req.params.wificredid;
     wificredDelete(wificredid,(err, result) => {

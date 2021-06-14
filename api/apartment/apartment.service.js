@@ -5,7 +5,6 @@ module.exports = {
     createApt:(data,callBack)=>{
         var cur= new Date();
         var createdate= Date.parse(cur)/1000;
-        console.log("Getting createdate :-", createdate);
         pool.query(
             `insert into apartment(aptname,apttypeid,description,createdat,status) values(?,?,?,?,?)`,
             [

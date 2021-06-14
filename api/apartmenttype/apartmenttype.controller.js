@@ -11,6 +11,12 @@ module.exports = {
                     message:"Database connection error"
                 })
             }
+            if(results.length != 0){
+                return res.status(404).json({
+                    success:1,
+                    message:"Record Doesn't Exist!!"
+                })                
+            }
             return res.status(200).json({
                 success:1,
                 data:{results}
@@ -21,17 +27,18 @@ module.exports = {
         const body=req.body;
         createapartmenttype(body,(error,results)=>{
             if(error){
-                return res.json({
+                return res.status(500).json({
                     "success":0,
-                    "message":"error"
+                    "message":"Database connection error"
                 })
             }
-            return res.json({
+            return res.status(200).json({
                 "success":1,
-                "message":"Record inserted successfully"
+                "data":{'ApartmentType':results.insertId}
             })
         })
     },
+
     updateapartmenttype:(req,res)=>{
         const body=req.body;
         updateapartmenttype(body,(error,results)=>{
@@ -41,9 +48,16 @@ module.exports = {
                     "message":"Error"
                 })
             }
-            return res.json({
+            if(results.affectedRows != 0){
+                return res.status(200).json({
+                    success:1,
+                    message:results.affectedRows+" "+'Apartment Type Updated Successfully!'
+                })
+            }
+
+            return res.status(404).json({
                 "success":1,
-                "message":"Record updated successfully"
+                "message":"Record Doesn't Exist!!"
             })
         })
     },
@@ -57,9 +71,15 @@ module.exports = {
                     "message":"error"
                 })
             }
-            return res.json({
-                "success":1,
-                "message":"Record deleted successfully"
+            if(results.affectedRows != 0){
+                return res.status(200).json({
+                    success:1,
+                    message:result.affectedRows+" "+'Apartment Type Deleted Successfully!'
+                })
+            }
+            return res.status(404).json({
+                "success":0,
+                "message":"Record Doesn't Exist!!"
             })
         })
     },
@@ -70,6 +90,12 @@ module.exports = {
                 return res.json({
                     "success":0,
                     "message":"error"
+                })
+            }
+            if(results.length == 0){
+                return res.status(404).json({
+                    "success":0,
+                    "message":"Record Doesn't Exist!!"
                 })
             }
             return res.json({

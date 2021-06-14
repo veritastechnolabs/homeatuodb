@@ -15,11 +15,13 @@ module.exports = {
         )
     },
     createroomtype:(body,callback)=>{
+        var cur= new Date();
+        var createdate= Date.parse(cur)/1000;
         pool.query(
             'INSERT INTO roomtype (roomtype,createdat,status) values(?,?,?)',
             [
                 body.roomtype,
-                body.createdat,
+                createdate,
                 body.status
             ],
             (error,results)=>{
@@ -32,10 +34,9 @@ module.exports = {
     },
     updateroomtype:(body,callback)=>{
         pool.query(
-            'UPDATE roomtype SET roomtype=?,createdat=?,status=? where roomtypeid=?',
+            'UPDATE roomtype SET roomtype=?,status=? where roomtypeid=?',
             [
                 body.roomtype,
-                body.createdat,
                 body.status,
                 body.roomtypeid
             ],

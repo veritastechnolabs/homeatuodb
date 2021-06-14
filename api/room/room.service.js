@@ -3,8 +3,7 @@ module.exports = {
   
     getroom:callBack=>{
         pool.query(
-            `select rm.roomname,rm.roomtypeid,rm.aptid,rm.description,rm.createdat,rm.status,rt.roomtype,aa.aptname 
-            from room rm join roomtype rt on rm.roomtypeid=rt.roomtypeid join apartment aa on rm.aptid=aa.aptid`,
+            `select rm.roomname,rm.roomtypeid,rm.aptid,rm.description,rm.createdat,rm.status,rt.roomtype,aa.aptname from room rm join roomtype rt on rm.roomtypeid=rt.roomtypeid join apartment aa on rm.aptid=aa.aptid`,
             [],
             (error,results,fields)=>{
                 if(error){
@@ -16,6 +15,8 @@ module.exports = {
         )
     },
     createroom:(body,callback)=>{
+        var cur= new Date();
+        var createdate= Date.parse(cur)/1000;
         pool.query(
             'INSERT INTO room (roomname,roomtypeid,aptid,description,createdat,status) values(?,?,?,?,?,?)',
             [
@@ -23,7 +24,7 @@ module.exports = {
                 body.roomtypeid,
                 body.aptid,
                 body.description,
-                body.createdat,
+                createdate,
                 body.status
             ],
             (error,results)=>{
@@ -36,13 +37,12 @@ module.exports = {
     },
     updateroom:(body,callback)=>{
         pool.query(
-            'UPDATE room SET roomname=?,roomtypeid=?,aptid=?,description=?,createdat=?,status=? where roomid=?',
+            'UPDATE room SET roomname=?,roomtypeid=?,aptid=?,description=?,status=? where roomid=?',
             [
                 body.roomname,
                 body.roomtypeid,
                 body.aptid,
                 body.description,
-                body.createdat,
                 body.status,
                 body.roomid
             ],
