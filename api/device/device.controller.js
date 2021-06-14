@@ -11,6 +11,12 @@ module.exports = {
                     message:"Database connection error"
                 })
             }
+            if(results.length == 0){
+                return res.status(404).json({
+                    success:0,
+                    message:"Record Doesn't Exist!!"
+                })
+            }
             return res.status(200).json({
                 success:1,
                 data:{results}

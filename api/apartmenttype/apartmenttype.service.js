@@ -15,11 +15,13 @@ module.exports = {
         )
     },
     createapartmenttype:(body,callback)=>{
+        var cur= new Date();
+        var createdate= Date.parse(cur)/1000;
         pool.query(
             'INSERT INTO apartmenttype (apttype,createdat,status) values(?,?,?)',
             [
                 body.apttype,
-                body.createdat,
+                createdate,
                 body.status
             ],
             (error,results)=>{
@@ -32,10 +34,9 @@ module.exports = {
     },
    updateapartmenttype:(body,callback)=>{
         pool.query(
-            'UPDATE apartmenttype SET apttype=?,createdat=?,status=? where apttypeid=?',
+            'UPDATE apartmenttype SET apttype=?,status=? where apttypeid=?',
             [
                 body.apttype,
-                body.createdat,
                 body.status,
                 body.apttypeid
             ],

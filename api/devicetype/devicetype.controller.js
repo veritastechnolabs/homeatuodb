@@ -1,10 +1,5 @@
-const {
-  createDevType,
-  getDevType,
-  getDeveTypeById,
-  updateDevType,
-  deleteDevType,
-} = require("./devicetype.service");
+const { createDevType , getDevType, getDeveTypeById,  updateDevType, deleteDevType} = require("./devicetype.service");
+
 module.exports = {
   createDevType: (req, res) => {
     const body = req.body;

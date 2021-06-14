@@ -14,7 +14,7 @@ module.exports = {
   },
   getManuf: (callback) => {
     pool.query(
-      "select mf.ssid as ss,mf.manfwifissid as mfwifiid ,dt.image img,dt.createat as createdat,dt.status as status,dt.devtype as devt from manfdevice mf join devicetype dt where mf.devtypeid=dt.devtypeid",
+      "select mf.ssid,mf.manfwifissid,dt.image,dt.createat,dt.status,dt.devtype from manfdevice mf join devicetype dt ON mf.devtypeid=dt.devtypeid",
       [],
       (error, result, fields) => {
         if (error) {

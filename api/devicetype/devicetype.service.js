@@ -1,10 +1,18 @@
 //config/dbconfigfile requred for db connection
-const pool = require("../../config/dbconfig"); 
+const pool = require("../../config/dbconfig");
 module.exports = {
   createDevType: (data, callback) => {
+    var cur = new Date();
+    var createdate = Date.parse(cur) / 1000;
     pool.query(
       "insert into devicetype(devtypehex,devtype,image,createat,status) values(?,?,?,?,?)",
-      [data.devtypehex, data.devtype, data.image, data.createat, data.status],
+      [
+        data.devtypehex,
+        data.devtype,
+        data.image,
+        createdate,
+        data.status
+      ],
       (error, result, fields) => {
         if (error) {
           return callback(error);
@@ -13,6 +21,7 @@ module.exports = {
       }
     );
   },
+
   getDevType: (callback) => {
     pool.query(
       "select * from devicetype order by devtypeid",
@@ -25,10 +34,13 @@ module.exports = {
       }
     );
   },
+
   getDeveTypeById: (devtypeid, callback) => {
     pool.query(
       "select * from devicetype where devtypeid=?",
-      [devtypeid],
+      [
+      devtypeid
+      ],
       (error, result, fields) => {
         if (error) {
           return callback(error);
@@ -39,8 +51,8 @@ module.exports = {
   },
   updateDevType: (body, callback) => {
     pool.query(
-      "update devicetype set 	devtypehex=?,devtype=?,	image=?,createat=?,status=?",
-      [body.devtypehex, body.devtypeid, body.image, body.createat, body.status],
+      "update devicetype set 	devtypehex=?,devtype=?,	image=?,status=? where devtypeid=?",
+      [body.devtypehex, body.devtype, body.image, body.status , body.devtypeid],
       (error, result, fileds) => {
         if (error) {
           return callback(error);
